@@ -76,6 +76,11 @@ resource "aws_security_group" "web-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+resource "aws_s3_bucket" "bad_bucket" {
+  bucket = "my-unsecure-bucket-12345"
+
+  acl = "public-read"
+}
 
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
