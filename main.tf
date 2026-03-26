@@ -70,11 +70,11 @@ resource "aws_security_group" "web-sg" {
   }
   // connectivity to ubuntu mirrors is required to run `apt-get update` and `apt-get install apache2`
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
     cidr_blocks = ["192.168.1.0/24"]
-  }
+}
 }
 
 
