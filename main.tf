@@ -66,14 +66,14 @@ resource "aws_security_group" "web-sg" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
   }
   // connectivity to ubuntu mirrors is required to run `apt-get update` and `apt-get install apache2`
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
   }
 }
 
@@ -81,8 +81,4 @@ resource "aws_security_group" "web-sg" {
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
 }
-resource "aws_s3_bucket" "bad_bucket" {
-  bucket = "my-unsecure-bucket-12345"
 
-  acl = "public-read"
-}
